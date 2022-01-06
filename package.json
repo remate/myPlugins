@@ -1,0 +1,29 @@
+{
+  "name": "demos",
+  "author": "zuo",
+  "version": "1.1.2",
+  "description": "cm-admin-base",
+  "scripts": {
+    "dev": "vue-cli-service serve --mode test",
+    "build": "vue-cli-service build --mode production",
+    "build:development": "vue-cli-service build --mode development",
+    "lint": "vue-cli-service lint",
+    "commit": "git add . && git-cz",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 ",
+    "postbuild": "node build/version.js",
+    "new": "plop"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ],
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "devDependencies": {
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0"
+  }
+}

@@ -189,9 +189,34 @@ let setZoom = function (zoom) {
   // console.log('setZoom')
   MAP.setZoom(zoom); //设置地图层级
 }
-let setFitView = function () {
-  // console.log('setFitView')
-  MAP.setFitView();
+let setFitView = function (typeId) {
+  // 自动适配到合适视野范围
+  // 无参数，默认包括所有覆盖物的情况
+  // {type:'p1'}
+  if(typeId){
+    let result=[];
+    let overlays = MAP.getAllOverlays("marker");
+    Object.keys(typeId).map(item => {
+      //item为type或者id
+      let mids = null
+      if (typeId[item] instanceof Array) {
+        mids = typeId[item]
+      } else {
+        mids = [typeId[item]]
+      }
+      //mid为具体id或type数组
+      mids.map(m => {
+        overlays.forEach((_item, index) => {
+          if (_item.getExtData()[item] == m) {
+            result.push(overlays[index]);
+          }
+        });
+      })
+    })
+    MAP.setFitView(result);
+  } else {
+    MAP.setFitView();
+  }
 }
 let clearAll = function () {
   // console.log('clearAll')
