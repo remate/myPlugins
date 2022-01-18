@@ -522,7 +522,8 @@ let clearAreaTypeId = function (typeId = {}) {
 let dblclick = function (callback) {
   if (isLeaflet) {
     MAP.on('dblclick', (e) => {
-      currentLnglat = [e.latlng.lat, e.latlng.lng]
+      // currentLnglat = [e.latlng.lng,e.latlng.lat ]
+      currentLnglat = [e.latlng.lat,e.latlng.lng]
       clearPointTypeId({type: 'self'})
       let myIcon = L.icon({
         iconSize: [39, 54],
@@ -569,7 +570,7 @@ let getAddress = function (p) {
         return
       }
       let params = {
-        "1": p.join(',')
+        "1": p.reverse().join(',')
       }
       searchByPoint(params).then(res => {
         if (res && res[1]) {
