@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Vue.js test</title>
+    <script src="../../dist/vue.js"></script>
+  </head>
+  <body>
+  <div id="test">
+    {{testData}}
+  </div>
+    <script>
+      var vm = new Vue({
+        el: '#test',
+        data: {
+          testData: 'tests'
+        }
+      })
+    </script>
+  </body>
+</html>

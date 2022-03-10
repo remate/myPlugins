@@ -1,0 +1,13 @@
+{
+  "name": "appes",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 1212",
+    "dummy": "echo $npm_config_cache_lock_wait"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
