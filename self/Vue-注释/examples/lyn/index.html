@@ -10,7 +10,7 @@
       <div v-once>{{ show }}</div>
     </div> -->
     <!-- <div>static node</div> -->
-    <comp></comp>
+    <comp msg="你好">哈哈</comp>
   </div>
   <script src="../../dist/vue.js"></script>
   <script>
@@ -28,7 +28,7 @@
             default: 'hello'
           }
         },
-        template: `<div>{{ msg }}</div>`
+        template: `<div>{{ msg }}<slot></slot></div>`
       }
     },
     mounted() {

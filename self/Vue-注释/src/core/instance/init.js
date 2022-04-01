@@ -24,14 +24,6 @@ export function initMixin (Vue: Class<Component>) {
     // 每个 vue 实例都有一个 _uid，并且是依次递增的
     vm._uid = uid++
 
-    let startTag, endTag
-    /* istanbul ignore if */
-    if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
-      startTag = `vue-perf-start:${vm._uid}`
-      endTag = `vue-perf-end:${vm._uid}`
-      mark(startTag)
-    }
-
     // a flag to avoid this being observed
     vm._isVue = true
     // 处理组件配置项
@@ -51,13 +43,6 @@ export function initMixin (Vue: Class<Component>) {
         vm
       )
     }
-    /* istanbul ignore else */
-    if (process.env.NODE_ENV !== 'production') {
-      // 设置代理，将 vm 实例上的属性代理到 vm._renderProxy
-      initProxy(vm)
-    } else {
-      vm._renderProxy = vm
-    }
     // expose real self
     vm._self = vm
     // 初始化组件实例关系属性，比如 $parent、$children、$root、$refs 等
@@ -75,17 +60,11 @@ export function initMixin (Vue: Class<Component>) {
     initInjections(vm) // resolve injections before data/props
     // 数据响应式的重点，处理 props、methods、data、computed、watch
     initState(vm)
-    // 解析组件配置项上的 provide 对象，将其挂载到 vm._provided 属性上 
+    // 解析组件配置项上的 provide 对象，将其挂载到 vm._provided 属性上
     initProvide(vm) // resolve provide after data/props
     // 调用 created 钩子函数
     callHook(vm, 'created')
 
-    /* istanbul ignore if */
-    if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
-      vm._name = formatComponentName(vm, false)
-      mark(endTag)
-      measure(`vue ${vm._name} init`, startTag, endTag)
-    }
 
     // 如果发现配置项上有 el 选项，则自动调用 $mount 方法，也就是说有了 el 选项，就不需要再手动调用 $mount，反之，没有 el 则必须手动调用 $mount
     if (vm.$options.el) {

@@ -30,7 +30,7 @@ function remove (event, fn) {
 }
 
 function createOnceHandler (event, fn) {
-  const _target = target
+  const _target ``= target
   return function onceHandler () {
     const res = fn.apply(null, arguments)
     if (res !== null) {
@@ -50,7 +50,7 @@ export function updateComponentListeners (
 }
 
 /**
- * 从 $on 和 $emit 的实现上也能看出，事件的原理，监听者和触发者都是组件自身 
+ * 从 $on 和 $emit 的实现上也能看出，事件的原理，监听者和触发者都是组件自身
  */
 export function eventsMixin (Vue: Class<Component>) {
   const hookRE = /^hook:/
@@ -58,7 +58,7 @@ export function eventsMixin (Vue: Class<Component>) {
    * 监听实例上的自定义事件，vm._event = { eventName: [fn1, ...], ... }
    * @param {*} event 单个的事件名称或者有多个事件名组成的数组
    * @param {*} fn 当 event 被触发时执行的回调函数
-   * @returns 
+   * @returns
    */
   Vue.prototype.$on = function (event: string | Array<string>, fn: Function): Component {
     const vm: Component = this
@@ -83,9 +83,9 @@ export function eventsMixin (Vue: Class<Component>) {
   /**
    * 监听一个自定义事件，但是只触发一次。一旦触发之后，监听器就会被移除
    * vm.$on + vm.$off
-   * @param {*} event 
-   * @param {*} fn 
-   * @returns 
+   * @param {*} event
+   * @param {*} fn
+   * @returns
    */
   Vue.prototype.$once = function (event: string, fn: Function): Component {
     const vm: Component = this
@@ -102,9 +102,9 @@ export function eventsMixin (Vue: Class<Component>) {
 
   /**
    * 移除自定义事件监听器，即从 vm._event 对象中找到对应的事件，移除所有事件 或者 移除指定事件的回调函数
-   * @param {*} event 
-   * @param {*} fn 
-   * @returns 
+   * @param {*} event
+   * @param {*} fn
+   * @returns
    */
   Vue.prototype.$off = function (event?: string | Array<string>, fn?: Function): Component {
     const vm: Component = this
@@ -147,7 +147,7 @@ export function eventsMixin (Vue: Class<Component>) {
   /**
    * 触发实例上的指定事件，vm._event[event] => cbs => loop cbs => cb(args)
    * @param {*} event 事件名
-   * @returns 
+   * @returns
    */
   Vue.prototype.$emit = function (event: string): Component {
     const vm: Component = this
