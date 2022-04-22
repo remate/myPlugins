@@ -58,6 +58,11 @@ export function initState (vm: Component) {
   }
   if (opts.computed) initComputed(vm, opts.computed)
   if (opts.watch && opts.watch !== nativeWatch) {
+    /**
+     * 如果传参为string则为方法名
+     * 如果为对象handler为对象的handler
+     * 否则为函数
+     */
     initWatch(vm, opts.watch)
   }
 }

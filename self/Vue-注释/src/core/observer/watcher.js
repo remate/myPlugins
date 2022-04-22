@@ -41,7 +41,7 @@ export default class Watcher {
   getter: Function;
   value: any;
 
-  constructor (
+  constructor(
     vm: Component,
     expOrFn: string | Function,
     cb: Function,
@@ -99,12 +99,12 @@ export default class Watcher {
 
   /**
    * 执行 this.getter，并重新收集依赖
-   * this.getter 是实例化 watcher 时传递的第二个参数，一个函数或者字符串，比如：updateComponent 或者 parsePath 返回的读取 this.xx 属性值的函数
+   * this.getter 是实例化 watcher 时传递的第二个参数，一个函数或者字符串，比如：updateComponent 或者 parsePath 返回的读取 this.xx 属性值的函数
    * 为什么要重新收集依赖？
    *   因为触发更新说明有响应式数据被更新了，但是被更新的数据虽然已经经过 observe 观察了，但是却没有进行依赖收集，
    *   所以，在更新页面时，会重新执行一次 render 函数，执行期间会触发读取操作，这时候进行依赖收集
    */
-  get () {
+  get() {
     // 打开 Dep.target，Dep.target = this
     pushTarget(this)
     // value 为回调函数执行的结果
@@ -138,7 +138,7 @@ export default class Watcher {
    *   1、添加 dep 给自己（watcher）
    *   2、添加自己（watcher）到 dep
    */
-  addDep (dep: Dep) {
+  addDep(dep: Dep) {
     // 判重，如果 dep 已经存在则不重复添加
     const id = dep.id
     if (!this.newDepIds.has(id)) {
@@ -157,7 +157,7 @@ export default class Watcher {
   /**
    * Clean up for dependency collection.
    */
-  cleanupDeps () {
+  cleanupDeps() {
     let i = this.deps.length
     while (i--) {
       const dep = this.deps[i]
@@ -178,7 +178,7 @@ export default class Watcher {
   /**
    * 根据 watcher 配置项，决定接下来怎么走，一般是 queueWatcher
    */
-  update () {
+  update() {
     /* istanbul ignore else */
     if (this.lazy) {
       // 懒执行时走这里，比如 computed
@@ -186,7 +186,7 @@ export default class Watcher {
       this.dirty = true
     } else if (this.sync) {
       // 同步执行，在使用 vm.$watch 或者 watch 选项时可以传一个 sync 选项，
-      // 当为 true 时在数据更新时该 watcher 就不走异步更新队列，直接执行 this.run 
+      // 当为 true 时在数据更新时该 watcher 就不走异步更新队列，直接执行 this.run
       // 方法进行更新
       // 这个属性在官方文档中没有出现
       this.run()
@@ -202,7 +202,7 @@ export default class Watcher {
    *   2、更新旧值为新值
    *   3、执行实例化 watcher 时传递的第三个参数，比如用户 watcher 的回调函数
    */
-  run () {
+  run() {
     if (this.active) {
       // 调用 this.get 方法
       const value = this.get()
@@ -241,7 +241,7 @@ export default class Watcher {
    *   这也是大家常说的 computed 和 methods 区别之一是 computed 有缓存的原理所在
    * 而页面更新后会 this.dirty 会被重新置为 true，这一步是在 this.update 方法中完成的
    */
-  evaluate () {
+  evaluate() {
     this.value = this.get()
     this.dirty = false
   }
@@ -249,7 +249,7 @@ export default class Watcher {
   /**
    * Depend on all deps collected by this watcher.
    */
-  depend () {
+  depend() {
     let i = this.deps.length
     while (i--) {
       this.deps[i].depend()
@@ -259,7 +259,7 @@ export default class Watcher {
   /**
    * Remove self from all dependencies' subscriber list.
    */
-  teardown () {
+  teardown() {
     if (this.active) {
       // remove self from vm's watcher list
       // this is a somewhat expensive operation so we skip it

@@ -10,12 +10,13 @@ import {
 import { updateListeners } from '../vdom/helpers/index'
 
 export function initEvents (vm: Component) {
-  vm._events = Object.create(null)
-  vm._hasHookEvent = false
+  vm._events = Object.create(null);
+  vm._hasHookEvent = false;
   // init parent attached events
-  const listeners = vm.$options._parentListeners
+  // 可以看出，这里是拿到父节点的事件监听，也就是说，在引用组件是注册的事件是组件获取，也就是说事件的派发和监听者都是子组件本身，和父组件无关
+  const listeners = vm.$options._parentListeners;
   if (listeners) {
-    updateComponentListeners(vm, listeners)
+    updateComponentListeners(vm, listeners);
   }
 }
 

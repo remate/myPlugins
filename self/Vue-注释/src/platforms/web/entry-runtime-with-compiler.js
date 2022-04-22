@@ -1,4 +1,4 @@
-/* @flow */
+    /* @flow */
 
 import config from 'core/config'
 import { warn, cached } from 'core/util/index'
@@ -17,7 +17,7 @@ const idToTemplate = cached(id => {
 /**
  * 编译器的入口
  * 运行时的 Vue.js 包就没有这部分的代码，通过 打包器 结合 vue-loader + vue-compiler-utils 进行预编译，将模版编译成 render 函数
- * 
+ *
  * 就做了一件事情，得到组件的渲染函数，将其设置到 this.$options 上
  */
 const mount = Vue.prototype.$mount
@@ -46,6 +46,7 @@ Vue.prototype.$mount = function (
    *   优先级：render > template > el
    */
   if (!options.render) {
+    //当用户没有配置render
     let template = options.template
     if (template) {
       // 处理 template 选项
@@ -87,7 +88,7 @@ Vue.prototype.$mount = function (
         outputSourceRange: process.env.NODE_ENV !== 'production',
         shouldDecodeNewlines,
         shouldDecodeNewlinesForHref,
-        // 界定符，默认 {{}}
+        // 界定符，默认 {{}}['{{','}}']
         delimiters: options.delimiters,
         // 是否保留注释
         comments: options.comments
