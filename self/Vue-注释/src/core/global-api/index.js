@@ -25,7 +25,7 @@ import {
  *   Vue.set、Vue.delete、Vue.nextTick、Vue.observable
  *   Vue.options.components、Vue.options.directives、Vue.options.filters、Vue.options._base
  *   Vue.use、Vue.extend、Vue.mixin、Vue.component、Vue.directive、Vue.filter
- *   
+ *
  */
 export function initGlobalAPI (Vue: GlobalAPI) {
   // config
@@ -64,29 +64,22 @@ export function initGlobalAPI (Vue: GlobalAPI) {
   Vue.nextTick = nextTick
 
   // 响应式方法
-  Vue.observable = <T>(obj: T): T => {
-    observe(obj)
-    return obj
-  }
+  // Vue.observable = <T>(obj: T): T => {
+  //   observe(obj)
+  //   return obj
+  // }
 
-  // Vue.options.compoents/directives/filter
   Vue.options = Object.create(null)
   ASSET_TYPES.forEach(type => {
     Vue.options[type + 's'] = Object.create(null)
   })
 
-  // 将 Vue 构造函数挂载到 Vue.options._base 上
   Vue.options._base = Vue
 
-  // 在 Vue.options.components 中添加内置组件，比如 keep-alive
   extend(Vue.options.components, builtInComponents)
 
-  // Vue.use
   initUse(Vue)
-  // Vue.mixin
   initMixin(Vue)
-  // Vue.extend
   initExtend(Vue)
-  // Vue.component/directive/filter
   initAssetRegisters(Vue)
 }

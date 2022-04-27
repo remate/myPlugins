@@ -28,6 +28,14 @@ export function initRender (vm: Component) {
   // so that we get proper render context inside it.
   // args order: tag, data, children, normalizationType, alwaysNormalize
   // internal version is used by render functions compiled from templates
+  /**
+   *
+   * @param {*} a 标签名
+   * @param {*} b
+   * @param {*} c
+   * @param {*} d
+   * @returns
+   */
   vm._c = (a, b, c, d) => createElement(vm, a, b, c, d, false)
   // normalization is always applied for the public version, used in
   // user-written render functions.

@@ -36,11 +36,11 @@ const sharedPropertyDefinition = {
 }
 
 // 设置代理，将 key 代理到 target 上
-export function proxy (target: Object, sourceKey: string, key: string) {
-  sharedPropertyDefinition.get = function proxyGetter () {
+export function proxy(target: Object, sourceKey: string, key: string) {
+  sharedPropertyDefinition.get = function proxyGetter() {
     return this[sourceKey][key]
   }
-  sharedPropertyDefinition.set = function proxySetter (val) {
+  sharedPropertyDefinition.set = function proxySetter(val) {
     this[sourceKey][key] = val
   }
   Object.defineProperty(target, key, sharedPropertyDefinition)
@@ -52,7 +52,7 @@ export function proxy (target: Object, sourceKey: string, key: string) {
  *   优先级：props、methods、data、computed 对象中的属性不能出现重复，优先级和列出顺序一致
  *         其中 computed 中的 key 不能和 props、data 中的 key 重复，methods 不影响
  */
-export function initState (vm: Component) {
+export function initState(vm: Component) {
   vm._watchers = []
   const opts = vm.$options
   // 处理 props 对象，为 props 对象的每个属性设置响应式，并将其代理到 vm 实例上
@@ -63,7 +63,7 @@ export function initState (vm: Component) {
    * 做了三件事
    *   1、判重处理，data 对象上的属性不能和 props、methods 对象上的属性相同
    *   2、代理 data 对象上的属性到 vm 实例
-   *   3、为 data 对象的上数据设置响应式 
+   *   3、为 data 对象的上数据设置响应式
    */
   if (opts.data) {
     initData(vm)
@@ -96,7 +96,7 @@ export function initState (vm: Component) {
 }
 
 // 处理 props 对象，为 props 对象的每个属性设置响应式，并将其代理到 vm 实例上
-function initProps (vm: Component, propsOptions: Object) {
+function initProps(vm: Component, propsOptions: Object) {
   const propsData = vm.$options.propsData || {}
   const props = vm._props = {}
   // 缓存 props 的每个 key，性能优化
@@ -118,7 +118,7 @@ function initProps (vm: Component, propsOptions: Object) {
     if (process.env.NODE_ENV !== 'production') {
       const hyphenatedKey = hyphenate(key)
       if (isReservedAttribute(hyphenatedKey) ||
-          config.isReservedAttr(hyphenatedKey)) {
+        config.isReservedAttr(hyphenatedKey)) {
         warn(
           `"${hyphenatedKey}" is a reserved attribute and cannot be used as component prop.`,
           vm
@@ -154,9 +154,9 @@ function initProps (vm: Component, propsOptions: Object) {
  * 做了三件事
  *   1、判重处理，data 对象上的属性不能和 props、methods 对象上的属性相同
  *   2、代理 data 对象上的属性到 vm 实例
- *   3、为 data 对象的上数据设置响应式 
+ *   3、为 data 对象的上数据设置响应式
  */
-function initData (vm: Component) {
+function initData(vm: Component) {
   // 得到 data 对象
   let data = vm.$options.data
   data = vm._data = typeof data === 'function'
@@ -203,7 +203,7 @@ function initData (vm: Component) {
   observe(data, true /* asRootData */)
 }
 
-export function getData (data: Function, vm: Component): any {
+export function getData(data: Function, vm: Component): any {
   // #7573 disable dep collection when invoking data getters
   pushTarget()
   try {
@@ -231,7 +231,7 @@ const computedWatcherOptions = { lazy: true }
  *   }
  * }
  */
-function initComputed (vm: Component, computed: Object) {
+function initComputed(vm: Component, computed: Object) {
   // $flow-disable-line
   const watchers = vm._computedWatchers = Object.create(null)
   // computed properties are just getters during SSR
@@ -242,12 +242,6 @@ function initComputed (vm: Component, computed: Object) {
     // 获取 key 对应的值，即 getter 函数
     const userDef = computed[key]
     const getter = typeof userDef === 'function' ? userDef : userDef.get
-    if (process.env.NODE_ENV !== 'production' && getter == null) {
-      warn(
-        `Getter is missing for computed property "${key}".`,
-        vm
-      )
-    }
 
     if (!isSSR) {
       // 为 computed 属性创建 watcher 实例
@@ -255,7 +249,7 @@ function initComputed (vm: Component, computed: Object) {
         vm,
         getter || noop,
         noop,
-        // 配置项，computed 默认是懒执行
+        // 配置项，computed 默认是懒执行 lazy = true
         computedWatcherOptions
       )
     }
@@ -278,7 +272,7 @@ function initComputed (vm: Component, computed: Object) {
 /**
  * 代理 computed 对象中的 key 到 target（vm）上
  */
-export function defineComputed (
+export function defineComputed(
   target: any,
   key: string,
   userDef: Object | Function
@@ -299,7 +293,7 @@ export function defineComputed (
     sharedPropertyDefinition.set = userDef.set || noop
   }
   if (process.env.NODE_ENV !== 'production' &&
-      sharedPropertyDefinition.set === noop) {
+    sharedPropertyDefinition.set === noop) {
     sharedPropertyDefinition.set = function () {
       warn(
         `Computed property "${key}" was assigned to but it has no setter.`,
@@ -314,9 +308,9 @@ export function defineComputed (
 /**
  * @returns 返回一个函数，这个函数在访问 vm.computedProperty 时会被执行，然后返回执行结果
  */
-function createComputedGetter (key) {
+function createComputedGetter(key) {
   // computed 属性值会缓存的原理也是在这里结合 watcher.dirty、watcher.evalaute、watcher.update 实现的
-  return function computedGetter () {
+  return function computedGetter() {
     // 得到当前 key 对应的 watcher
     const watcher = this._computedWatchers && this._computedWatchers[key]
     if (watcher) {
@@ -347,7 +341,7 @@ function createComputedGetter (key) {
  * 功能同 createComputedGetter 一样
  */
 function createGetterInvoker(fn) {
-  return function computedGetter () {
+  return function computedGetter() {
     return fn.call(this, this)
   }
 }
@@ -360,7 +354,7 @@ function createGetterInvoker(fn) {
  *         methos 中的 key 与 Vue 实例上已有的方法重叠，一般是一些内置方法，比如以 $ 和 _ 开头的方法
  *   3、将 methods[key] 放到 vm 实例上，得到 vm[key] = methods[key]
  */
-function initMethods (vm: Component, methods: Object) {
+function initMethods(vm: Component, methods: Object) {
   // 获取 props 配置项
   const props = vm.$options.props
   // 遍历 methods 对象
@@ -412,7 +406,7 @@ function initMethods (vm: Component, methods: Object) {
  *   'key.key5' { ... }
  * }
  */
-function initWatch (vm: Component, watch: Object) {
+function initWatch(vm: Component, watch: Object) {
   // 遍历 watch 对象
   for (const key in watch) {
     const handler = watch[key]
@@ -430,10 +424,10 @@ function initWatch (vm: Component, watch: Object) {
 /**
  * 两件事：
  *   1、兼容性处理，保证 handler 肯定是一个函数
- *   2、调用 $watch 
- * @returns 
+ *   2、调用 $watch
+ * @returns
  */
-function createWatcher (
+function createWatcher(
   vm: Component,
   expOrFn: string | Function,
   handler: any,
@@ -451,7 +445,7 @@ function createWatcher (
   return vm.$watch(expOrFn, handler, options)
 }
 
-export function stateMixin (Vue: Class<Component>) {
+export function stateMixin(Vue: Class<Component>) {
   // flow somehow has problems with directly declared definition object
   // when using Object.defineProperty, so we have to procedurally build up
   // the object here.
@@ -518,7 +512,7 @@ export function stateMixin (Vue: Class<Component>) {
       }
     }
     // 返回一个 unwatch 函数，用于解除监听
-    return function unwatchFn () {
+    return function unwatchFn() {
       watcher.teardown()
     }
   }

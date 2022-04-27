@@ -39,7 +39,7 @@ export class Observer {
 
   constructor (value: any) {
     this.value = value
-    // 实例话一个 dep
+    // 实例化一个 dep
     this.dep = new Dep()
     this.vmCount = 0
     // 在 value 对象上设置 __ob__ 属性

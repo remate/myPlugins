@@ -33,6 +33,7 @@ export function initLifecycle (vm: Component) {
   const options = vm.$options
 
   // locate first non-abstract parent
+  //向上找到第一个非抽象的父节点，赋值给vm.$parent
   let parent = options.parent
   if (parent && !options.abstract) {
     while (parent.$options.abstract && parent.$parent) {
