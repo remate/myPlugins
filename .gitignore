@@ -2,8 +2,4 @@
 node_modules
 /dist
 .history
-<<<<<<< HEAD
 */.history
-=======
-*/.history
->>>>>>> fd7f3bcf698bf20a4e4b1f7aed4a5820b02be8d9
