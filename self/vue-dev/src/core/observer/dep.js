@@ -1,7 +1,7 @@
 /* @flow */
 
 import type Watcher from './watcher'
-import { remove } from '../util/index'
+import { remove } from '../util/index'//通过indexof寻找出index 然后splice删除
 import config from '../config'
 
 let uid = 0

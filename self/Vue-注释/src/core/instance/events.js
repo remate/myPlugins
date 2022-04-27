@@ -30,7 +30,7 @@ function remove (event, fn) {
 }
 
 function createOnceHandler (event, fn) {
-  const _target ``= target
+  const _target = target
   return function onceHandler () {
     const res = fn.apply(null, arguments)
     if (res !== null) {

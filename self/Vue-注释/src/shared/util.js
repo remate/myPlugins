@@ -103,6 +103,8 @@ export function toNumber (val: string): number | string {
  * Make a map and return a function for checking if a key
  * is in that map.
  */
+// makeMap('script,style,textarea', true)
+// [script, style, textarea]
 export function makeMap (
   str: string,
   expectsLowerCase?: boolean

@@ -42,25 +42,6 @@ export function createCompileToFunctionFn (compile: Function): Function {
     const warn = options.warn || baseWarn
     delete options.warn
 
-    /* istanbul ignore if */
-    if (process.env.NODE_ENV !== 'production') {
-      // 检测可能的 CSP 限制
-      try {
-        new Function('return 1')
-      } catch (e) {
-        if (e.toString().match(/unsafe-eval|CSP/)) {
-          // 看起来你在一个 CSP 不安全的环境中使用完整版的 Vue.js，模版编译器不能工作在这样的环境中。
-          // 考虑放宽策略限制或者预编译你的 template 为 render 函数
-          warn(
-            'It seems you are using the standalone build of Vue.js in an ' +
-            'environment with Content Security Policy that prohibits unsafe-eval. ' +
-            'The template compiler cannot work in this environment. Consider ' +
-            'relaxing the policy to allow unsafe-eval or pre-compiling your ' +
-            'templates into render functions.'
-          )
-        }
-      }
-    }
 
     // 如果有缓存，则跳过编译，直接从缓存中获取上次编译的结果
     const key = options.delimiters

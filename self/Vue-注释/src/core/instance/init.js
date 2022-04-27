@@ -110,7 +110,7 @@ export function resolveConstructorOptions (Ctor: Class<Component>) {
       Ctor.superOptions = superOptions
       // check if there are any late-modified/attached options (#4976)
       // 找到更改的选项
-      const modifiedOptions = resolveModifiedOptions(Ctor)
+      const modifiedOptions = resolveModifiedOptions(Ctor)//返回的是不同的选项
       // update base extend options
       if (modifiedOptions) {
         // 将更改的选项和 extend 选项合并

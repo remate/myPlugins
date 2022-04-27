@@ -68,7 +68,7 @@ export function parseHTML(html, options) {
   let last, lastTag
   while (html) {
     last = html
-    // 确保不是在 script、style、textarea 这样的纯文本元素中
+    // isPlainTextElement会进行判断，确保不是在 script、style、textarea 这样的纯文本元素中
     if (!lastTag || !isPlainTextElement(lastTag)) {
       // 找第一个 < 字符
       let textEnd = html.indexOf('<')
@@ -76,6 +76,7 @@ export function parseHTML(html, options) {
       // 分别处理可能找到的注释标签、条件注释标签、Doctype、开始标签、结束标签
       // 每处理完一种情况，就会截断（continue）循环，并且重置 html 字符串，将处理过的标签截掉，下一次循环处理剩余的 html 字符串模版
       if (textEnd === 0) {
+        //如果为0，可能为doctype，注释等
         // 处理注释标签 <!-- xx -->
         if (comment.test(html)) {
           // 注释标签的结束索引
@@ -85,10 +86,16 @@ export function parseHTML(html, options) {
             // 是否应该保留 注释
             if (options.shouldKeepComment) {
               // 得到：注释内容、注释的开始索引、结束索引
+              // html.substring(4, commentEnd)为<!--和-->之间的内容
               options.comment(html.substring(4, commentEnd), index, index + commentEnd + 3)
             }
             // 调整 html 和 index 变量
+            // function advance(n) {
+            //   index += n
+            //   html = html.substring(n)
+            // }
             advance(commentEnd + 3)
+          // 得到HTML为"<!--<div>adfasfasfas</div>-->
             continue
           }
         }
@@ -172,6 +179,10 @@ export function parseHTML(html, options) {
       }
 
       // 如果 textEnd < 0，说明 html 中就没找到 <，那说明 html 就是一段文本
+
+      /**
+       * 没有找到<
+       */
       if (textEnd < 0) {
         text = html
       }
@@ -223,6 +234,7 @@ export function parseHTML(html, options) {
       break
     }
   }
+  ///////////
 
   // Clean up any remaining tags
   parseEndTag()
@@ -283,7 +295,7 @@ export function parseHTML(html, options) {
    *  处理属性 match.attrs，如果不是自闭合标签，则将标签信息放到 stack 数组，待将来处理到它的闭合标签时再将其弹出 stack，表示该标签处理完毕，这时标签的所有信息都在 element ast 对象上了
    *  接下来调用 options.start 方法处理标签，并根据标签信息生成 element ast，
    *  以及处理开始标签上的属性和指令，最后将 element ast 放入 stack 数组
-   * 
+   *
    * @param {*} match { tagName: 'div', attrs: [[xx], ...], start: index }
    */
   function handleStartTag(match) {
