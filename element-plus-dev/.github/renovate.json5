@@ -1,0 +1,25 @@
+{
+  extends: ['config:base', 'schedule:weekly', 'group:allNonMajor'],
+  labels: ['dependencies'],
+  pin: false,
+  rangeStrategy: 'bump',
+  node: false,
+  packageRules: [
+    {
+      depTypeList: ['peerDependencies'],
+      enabled: false,
+    },
+  ],
+  ignoreDeps: [
+    'node',
+    'csstype',
+
+    // pure esm
+    'chalk',
+
+    // test
+    '@vue/test-utils',
+
+    'cypress',
+  ],
+}
