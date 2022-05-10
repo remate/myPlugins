@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "babel": "./node_modules/.bin/babel src --out-dir lib --watch",
+    "preset": "./node_modules/.bin/babel src --out-dir lib --presets=@babel/env"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.17.10",
+    "@babel/plugin-transform-arrow-functions": "^7.16.7",
+    "@babel/preset-env": "^7.17.10"
+  }
+}
