@@ -30,13 +30,15 @@ function concat() {
   if (!length) {
     return [];
   }
-  var args = Array(length - 1),
+  var args = Array(length - 1),//初始化args
       array = arguments[0],
       index = length;
 
   while (index--) {
     args[index - 1] = arguments[index];
+    //所有参数不管是不是数组先传入args
   }
+  // [array]第一个参数都会以数组形式
   return arrayPush(isArray(array) ? copyArray(array) : [array], baseFlatten(args, 1));
 }
 

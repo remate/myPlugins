@@ -51,10 +51,13 @@ function baseDifference(array, values, iteratee, comparator) {
     if (isCommon && computed === computed) {
       var valuesIndex = valuesLength;
       while (valuesIndex--) {
+        // 如果有一样的值，继续下一次循环
         if (values[valuesIndex] === computed) {
           continue outer;
         }
       }
+      // 巧妙的方法判断如果有一样的值
+      // 不会进行到这里
       result.push(value);
     }
     else if (!includes(values, computed, comparator)) {

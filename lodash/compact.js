@@ -19,9 +19,10 @@ function compact(array) {
       resIndex = 0,
       result = [];
 
+      //遍历判断每一位数
   while (++index < length) {
     var value = array[index];
-    if (value) {
+    if (value) {//只要if判断为true就满足 undefined null 0 '' NaN false
       result[resIndex++] = value;
     }
   }

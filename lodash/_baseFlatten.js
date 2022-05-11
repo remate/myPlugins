@@ -12,6 +12,7 @@ var arrayPush = require('./_arrayPush'),
  * @param {Array} [result=[]] The initial result value.
  * @returns {Array} Returns the new flattened array.
  */
+// 做数组平铺
 function baseFlatten(array, depth, predicate, isStrict, result) {
   var index = -1,
       length = array.length;
