@@ -1,0 +1,12 @@
+body {
+  .aa {
+    color: red;
+    background-image: url('../img/bg.png');
+
+    span {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
