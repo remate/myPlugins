@@ -1,0 +1,9 @@
+/* 改变主题色变量 */
+$--color-primary: #3786FD;
+
+/* 改变 icon 字体路径变量，必需 */
+$--font-path: '~@cci/cui/lib/theme-default/fonts';
+
+@import "~@cci/cui/packages/theme-default/src/index.scss";
+
+

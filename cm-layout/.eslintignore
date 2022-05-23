@@ -1,0 +1,6 @@
+/plop-templates/
+/build/
+/node_modules/
+/dist/
+/easy-mock-template/
+*

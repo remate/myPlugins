@@ -77,7 +77,7 @@ export class Store {
 
   install (app, injectKey) {
     app.provide(injectKey || storeKey, this)
-    app.config.globalProperties.$store = this
+    app.config.globalProperties.$store = this//定义全局vue变量this.$store = this
 
     const useDevtools = this._devtools !== undefined
       ? this._devtools
