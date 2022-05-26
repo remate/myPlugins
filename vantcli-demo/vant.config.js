@@ -37,6 +37,11 @@ module.exports = {
             title: '标题信息展示',
             hideSimulator: true, // 只针对某个页面不显示
           },
+          {
+            path: 'text-list',
+            title: '行文本',
+            hideSimulator: true, // 只针对某个页面不显示
+          },
         ],
       },
     ],
