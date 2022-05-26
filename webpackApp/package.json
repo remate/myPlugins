@@ -1,6 +1,7 @@
 {
   "scripts": {
     "build": "webpack --config ./build/webpack.prod.js",
+    "build:vue": "webpack --config ./build/webpack.vue.js",
     "dev-build": "webpack --config ./build/webpack.dev.js",
     "watch": "webpack --watch",
     "dev2": "webpack-dev-server --open --port 5000",
@@ -12,6 +13,7 @@
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/plugin-transform-runtime": "^7.18.0",
     "@babel/preset-env": "^7.18.0",
+    "add-asset-html-webpack-plugin": "^5.0.2",
     "autoprefixer": "^10.4.7",
     "babel-loader": "^8.2.5",
     "clean-webpack-plugin": "^4.0.0",

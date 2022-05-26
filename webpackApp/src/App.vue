@@ -1,7 +1,27 @@
 <template>
-  <div>{{ name }}</div>
+  <div>
+    {{homeName}}
+    <router-view></router-view>
+  </div>
 </template>
-<script setup>
-let name = "nick";
+<script>
+export default {
+  name: "home",
+  data() {
+    return {};
+  },
+  provide() {
+    return {
+      app: this,
+    };
+  },
+  computed: {},
+  components: {},
+  methods: {},
+  mounted() {},
+};
 </script>
-<style></style>
+<style lang="scss" scoped>
+#app {
+}
+</style>

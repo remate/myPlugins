@@ -4,6 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const AddAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin')
 
 module.exports = {
     optimization: {
@@ -18,7 +19,7 @@ module.exports = {
     entry: './src/main.js',//入口文件
     output: {
         path: path.join(__dirname, '..', './dist'),//这里必须得是绝对路径，所以需要用到path.resolve来解析成绝对路径
-        filename: '[name].[hash:6].js'//输出的文件名
+        filename: '[name].[contenthash:6].js'//输出的文件名
     },
     // watch:true
     // devServer: {
@@ -33,7 +34,7 @@ module.exports = {
             filename: 'index.html',//打包名字
             template: './src/index.html'//根据这个模板生成html
         }),
-        new CleanWebpackPlugin(),
+        // new CleanWebpackPlugin(),//使用了dll后去掉
 
         new CopyWebpackPlugin(//版本为9.*
             {
@@ -52,7 +53,15 @@ module.exports = {
         new webpack.IgnorePlugin({
             resourceRegExp: /^\.\/locale$/,
             contextRegExp: /moment$/,
+        }),
+        new webpack.DllReferencePlugin({
+            manifest: path.resolve(__dirname, '../dist/manifest.json')
+        }),
+        new AddAssetHtmlWebpackPlugin({
+            filepath: path.resolve(__dirname, '../dist/vue_dll.js'),
+            publicPath: './',//不能少
         })
+
     ],
 
     module: {

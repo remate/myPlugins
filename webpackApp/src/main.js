@@ -1,14 +1,22 @@
-import Vue from "vue/dist/vue.js";
+import Vue from "vue/dist/vue.js";//不用解析vue文件 直接html
 import VueRouter from 'vue-router'
+// import App from "./app.vue";
 Vue.use(VueRouter)
 const comp = {
-    template: '<h2>12121</h2>'
+    template: '<h2>page1</h2>'
+}
+const comp2 = {
+    template: '<h2>page2</h2>'
 }
 const router = new VueRouter({
     routes: [
         {
             path: '/home',
             component: comp
+        },
+        {
+            path: '/work',
+            component: comp2
         }
     ]
 })
