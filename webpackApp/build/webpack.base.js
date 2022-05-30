@@ -5,7 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const AddAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin')
-
+const VueLoaderPlugin = require('vue-loader-plugin')
 module.exports = {
     optimization: {
         splitChunks: {
@@ -14,6 +14,11 @@ module.exports = {
     },
     performance: {
         hints: false//防止报入口文件太大的错误
+    },
+    resolve: {
+        alias: {
+            'vue$': 'vue/dist/vue.esm.js'
+        }
     },
     // mode: 'development',//设置打包模式:开发、生产//production
     entry: './src/main.js',//入口文件
@@ -60,7 +65,8 @@ module.exports = {
         new AddAssetHtmlWebpackPlugin({
             filepath: path.resolve(__dirname, '../dist/vue_dll.js'),
             publicPath: './',//不能少
-        })
+        }),
+        new VueLoaderPlugin()
 
     ],
 
@@ -123,7 +129,10 @@ module.exports = {
             //     test:/\.(htm||html)$)/i,
             //     loader:'html-withimg-loader'//仅处理html文件中的图片引用
             // },
-
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader'
+            }
         ]
     }
 }

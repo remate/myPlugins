@@ -1,0 +1,24 @@
+{
+  "name": "webpackBin",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "mypack": "./bin/pack.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/generator": "^7.18.2",
+    "@babel/parser": "^7.18.3",
+    "@babel/traverse": "^7.18.2",
+    "ejs": "^3.1.8"
+  },
+  "devDependencies": {
+    "mkdirp": "^1.0.4",
+    "tapable": "^2.2.1"
+  }
+}

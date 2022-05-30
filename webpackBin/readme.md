@@ -1,0 +1,3 @@
+本机link一个类似webpack
+配置package.json下的bin
+npm link
