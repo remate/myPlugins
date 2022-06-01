@@ -24,6 +24,7 @@ export default class taps {
         //         cb();
         //     }, 4000);
         // })
+        //会等上面两个tapAsync的同步代码执行完再执行cb()
         this.hooks.hacks.tapPromise('1', function (name, cb) {
             return new Promise(function (resolve, reject) {
                 setTimeout(() => {
@@ -32,7 +33,7 @@ export default class taps {
                 }, 1000);
             });
         });
-
+        //有一个为reject 就执行reject回调
         this.hooks.hacks.tapPromise('2', function (name, cb) {
             return new Promise(function (resolve, reject) {
                 setTimeout(() => {

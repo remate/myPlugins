@@ -11,7 +11,12 @@ module.exports = merge(baseConfig, {
         hot: true,//是否热更新
         // static: './src'//webpack5//html的默认位置
         proxy: {
-            '/api': 'http://localhost:9000',
+            // '/api': 'http://localhost:9000',
+            // '/socket.io': {
+            //     target: 'http://localhost:3001',
+            //     ws: true,
+            //     changeOrigin: true
+            // },
         },
     },
     plugins: [

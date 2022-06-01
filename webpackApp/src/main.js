@@ -2,6 +2,20 @@ import Vue from "vue";//不用解析vue文件 直接html
 import VueRouter from 'vue-router'
 // import App from "./app.vue";
 Vue.use(VueRouter)
+import VueSocketIO from 'vue-socket.io'
+import SocketIO from 'socket.io-client'
+// socket 连接参数
+const socketOptions = {
+    autoConnect: false,//是否自动连接
+}
+// 注册
+Vue.use(
+    new VueSocketIO({
+        debug: true,  
+        connection: SocketIO("http://localhost:3001", socketOptions),
+    })
+)
+
 const comp = {
     template: '<h2>page1</h2>'
 }
@@ -32,7 +46,8 @@ var app = new Vue({
 // import './css/a.css';
 // import './css/b.scss';
 // import './css/c.less';
-// import { getUserInfo } from "./api/http";
+import { getUserInfo } from "./api/http";
+getUserInfo()
 // import moment from "moment";
 // import 'moment/locale/zh-cn';
 // moment.locale('zh-CN')
@@ -56,7 +71,7 @@ var app = new Vue({
 // // console.log(a.next())
 // // console.log(a.next())
 // // console.log($)
-// getUserInfo()
+
 // console.log(moment().format('dddd'))
 // // setTimeout(() => {
 // //     inpor()

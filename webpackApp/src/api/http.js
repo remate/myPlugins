@@ -1,9 +1,4 @@
-let host = 'http://localhost:9000'
-console.log(IS_DEV)
-if (IS_DEV) {
-    host = 'http://localhost:9000'
-}
-let url = '/api/getUserInfo'
+let url = 'http://localhost:9000/api/getUserInfo'
 import axios from "axios";
 export const getUserInfo = () => {
     axios.get(url).then(res=>{

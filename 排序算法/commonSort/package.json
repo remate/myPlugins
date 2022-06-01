@@ -1,0 +1,11 @@
+{
+  "name": "common-sort",
+  "version": "1.0.2",
+  "description": "Six common algorithms",
+  "main": "index.js",
+  "keywords": [
+    "algorithms"
+  ],
+  "author": "zuoci",
+  "license": "ISC"
+}
