@@ -13,9 +13,9 @@ let quickSorts = function (arr) {
             mid.push(arr[i]);
         }
     }
-    return quickSort(left).concat(mid, quickSort(right));
+    return quickSorts(left).concat(mid, quickSorts(right));
 };
 let quickSort = function (arr, flag = 0) {
-    return flag ? quickSort(arr).reverse() : quickSort(arr)
+    return flag ? quickSorts(arr).reverse() : quickSorts(arr)
 }
 module.exports = quickSort

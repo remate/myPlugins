@@ -12,8 +12,9 @@ const io = new Server(server, {
     }
 });
 
+
 io.on('connection', function (socket) { // socket相关监听都要放在这个回调里
-    console.log('登录');
+    console.log('登录1');
 
     socket.on("disconnect", function () {
         console.log("登出");

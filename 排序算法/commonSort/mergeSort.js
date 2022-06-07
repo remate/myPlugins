@@ -24,7 +24,7 @@ let mergeSorts = function (arr) {
     let mid = Math.floor(arr.length / 2)
     // 拆分数组  
     let left = arr.slice(0, mid), right = arr.slice(mid);
-    let mergeLeftArray = mergeSort(left), mergeRightArray = mergeSort(right)
+    let mergeLeftArray = mergeSorts(left), mergeRightArray = mergeSorts(right)
     return merge(mergeLeftArray, mergeRightArray)
 }
 let mergeSort = function (arr, flag = 0) {
