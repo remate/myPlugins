@@ -1,0 +1,29 @@
+.selectBtnList {
+  height: 18px;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+
+  .itemButton {
+    width: 44px;
+    user-select: none;
+    flex: 1;
+    line-height: 18px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid #118ee9;
+    color: #118ee9;
+    margin-left: 10px;
+  }
+
+  .selectBtn {
+    flex: 1;
+    line-height: 18px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: #fff;
+    background: #118ee9;
+  }
+}
