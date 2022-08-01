@@ -67,7 +67,7 @@ export default {
             upIcon: 'https://img.yzcdn.cn/vant/logo.png',
             down: '10%',
             downIcon: 'https://img.yzcdn.cn/vant/logo.png',
-            // order: [3, 2, 1], //默认顺序：大标题数>字标题>文字描述
+            order: [3, 2, 1], //默认顺序：大标题数>字标题>文字描述
           },
           {
             title: '近一月',
@@ -82,16 +82,16 @@ export default {
             num: 1567,
             unit: '件',
             name: '本月处理数',
-            // order: [3, 1, 2], //默认顺序：大标题数>字标题>文字描述
+            order: [3, 1, 2], //默认顺序：大标题数>字标题>文字描述
           },
           {
-            title: '近一年',
+            title: '',
             num: 1567,
             unit: '件',
             name: '本月结案数',
             up: '10%',
             down: '10%',
-            order: [1, 2, 3], //默认顺序：大标题数>字标题>文字描述
+            // order: [1, 2, 3], //默认顺序：大标题数>字标题>文字描述
           },
         ];
       },

@@ -28,8 +28,8 @@
         v-html="item.value"
         :class="item.class ? item.class : ''"
         :style="{
-          fontSize: fontSize + 'px',
-          textAlign: valueAlign,
+          fontSize: item.fontSize + 'px',
+          textAlign: item.valueAlign,
           paddingRight: item.arrow ? '20px' : 0,
         }"
       ></div>
@@ -47,11 +47,25 @@ export default {
         return [
           //需要自动换行的  单一文字的要写在value
           {
+            icon: 'https://img.yzcdn.cn/vant/logo.png',
+            title: '违章建筑',
+            value: '2000m³',
+            // arrow: true,
+            inline: true,
+            valueAlign: 'right',
+          },
+          {
+            icon: 'https://img.yzcdn.cn/vant/logo.png',
+            title: '出土面积',
+            value: '2000m³',
+            inline: true,
+            valueAlign: 'right',
+          },
+          {
             // icon: 'https://img.yzcdn.cn/vant/logo.png',
             title: '违章建筑',
             value: '2000m³',
             // arrow: true,
-            // inline: false,
           },
           {
             // icon: 'https://img.yzcdn.cn/vant/logo.png',
