@@ -14,14 +14,19 @@
             el: '#app',
             data() {
                 return {
-                    name: 'zuoci',
-                    age: '29'
+                    has: [1, 2, 3, { a: 1 }]
+                    // name: 'zuoci',
+                    // age: '29',
+                    // info:{
+                    //     address:12
+                    // }
                 }
             },
             computed() { },
             watch() { }
         })
-        console.log('用户获取data::html',vm._data)
+        vm._data.has.push({ a: 1 })
+        console.log('用户获取data::html', vm._data)
     </script>
 </body>
 

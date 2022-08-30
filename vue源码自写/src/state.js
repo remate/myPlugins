@@ -1,8 +1,9 @@
+import { observe } from "./observe/index";
 export function initState(vm) {
     const opts = vm.$options
     //vue的数据来源 属性 方法 数据 计算属性 watch
     if (opts.props) {
-        initProps(vm)
+        initProps(vm) 
     }
     if (opts.methods) {
         initMethod(vm)
@@ -25,8 +26,7 @@ function initData(vm) {
     data = vm._data = typeof data === 'function' ? data.call(vm) : data
     //对data对象进行劫持,即用户改变数据，可以得到通知，从而去刷新页面，数据驱动视图
     // 通过Object.defineProperty()
-    
-
+    observe(data)//响应式原理
 }
 function initComputed(vm) { }
 function initWatch(vm) { }
