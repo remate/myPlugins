@@ -8,24 +8,26 @@
 </head>
 
 <body>
+    <div id="app">hello
+        <p>{{name}}</p>
+        <span>{{age}}</span>
+    </div>
     <script src="/dist/umd/vue.js"></script>
     <script>
         let vm = new Vue({
             el: '#app',
             data() {
                 return {
-                    has: [1, 2, 3, { a: 1 }]
-                    // name: 'zuoci',
-                    // age: '29',
-                    // info:{
-                    //     address:12
-                    // }
+                    name: 'zuoci',
+                    age: '29',
+                    info: {
+                        address: 12
+                    }
                 }
             },
             computed() { },
-            watch() { }
+            watch() { },
         })
-        vm._data.has.push({ a: 1 })
         console.log('用户获取data::html', vm._data)
     </script>
 </body>
