@@ -114,15 +114,28 @@ function parseHTML(html) {
     }
     return root;
 }
+function genProps(attrs){
+    let str = '';
+}
+function generate(el){
+    let code = `_c("${el.tag}",${
+        el.attrs.length?genProps(el.attrs):'undefined'
+    })
+    `
+    return code;
+}
 export function compileToFunction(template) {
     //解析html字符串，再解析成ast
     let root = parseHTML(template);
-    console.log(root)
+
+    //将ast再次转化成js的语法
+    let code = generate(root)
+    console.log(code)
     return function render() { };
 }
 
 // template
-{
+// {
     /* <div id='app'>
       <p>hello</p>
   </div>
@@ -145,4 +158,4 @@ export function compileToFunction(template) {
           }]
       }
   } */
-}
+// }
