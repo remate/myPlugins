@@ -26,6 +26,17 @@ function initData(vm) {
     data = vm._data = typeof data === 'function' ? data.call(vm) : data
     //对data对象进行劫持,即用户改变数据，可以得到通知，从而去刷新页面，数据驱动视图
     // 通过Object.defineProperty()
+    // 为了让用户更好的使用，希望通过vm.xxx进行取值
+    for (let key in data) {
+        Object.defineProperty(vm, key, {
+            get() {
+                return vm['_data'][key]
+            },
+            set(newValue) {
+                vm['_data'][key] = newValue
+            }
+        })
+    }
     observe(data)//响应式原理
 }
 function initComputed(vm) { }

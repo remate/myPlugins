@@ -35,6 +35,8 @@ function defineReactive(data, key, value) {
     //如果二级层次也是对象也需要观测
     observe(value)
     Object.defineProperty(data, key, {
+        configurable: true,
+        enumerable: true,
         get() {
             return value
         },

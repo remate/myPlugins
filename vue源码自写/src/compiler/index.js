@@ -1,6 +1,3 @@
-import { match } from "assert";
-import { Console } from "console";
-
 var unicodeRegExp =
     /a-zA-Z\u00B7\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u037D\u037F-\u1FFF\u200C-\u200D\u203F-\u2040\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD/;
 // var dynamicArgAttribute = /^\s*((?:v-[\w-]+:|@|:|#)\[[^=]+?\][^\s"'<>\/=]*)(?:\s*(=)\s*(?:"([^"]*)"+|'([^']*)'+|([^\s"'=<>`]+)))?/;
@@ -15,52 +12,52 @@ var defaultTagRE = /\{\{((?:.|\r?\n)+?)\}\}/g;
 // var doctype = /^<!DOCTYPE [^>]+>/i;
 // var comment = /^<!\--/;
 // var conditionalComment = /^<!\[/;
-let root = null; //ast语法树树根
-let currentParent;
-let stack = [];
-const ELEMENT_TYPE = 1; //元素
-const TEXT_TYPE = 3; //文本
-
-function createASTElement(tagName, attrs) {
-    return {
-        tag: tagName,
-        type: ELEMENT_TYPE,
-        children: [],
-        attrs,
-        parent: null,
-    };
-}
-
-function start(tagName, attrs) {
-    // console.log("开始标签:", tagName, "属性是:", attrs);
-    let element = createASTElement(tagName, attrs);
-    if (!root) {
-        root = element;
-    }
-    currentParent = element;
-    stack.push(element); //开始标签存放到栈中
-}
-function end(tagName) {
-    // console.log("结束标签:", tagName);
-    let element = stack.pop();
-    currentParent = stack[stack.length - 1];
-    if (currentParent) {
-        element.parent = currentParent;
-        currentParent.children.push(element);
-    }
-}
-function chars(text) {
-    // console.log("文本是:", text);
-    text = text.replace(/\s/g, "");
-    if (text) {
-        currentParent.children.push({
-            text,
-            type: TEXT_TYPE,
-        });
-    }
-}
 function parseHTML(html) {
     //这里复杂情况没有做，注释节点等
+    let root = null; //ast语法树树根
+    let currentParent;
+    let stack = [];
+    const ELEMENT_TYPE = 1; //元素
+    const TEXT_TYPE = 3; //文本
+
+    function createASTElement(tagName, attrs) {
+        return {
+            tag: tagName,
+            type: ELEMENT_TYPE,
+            children: [],
+            attrs,
+            parent: null,
+        };
+    }
+
+    function start(tagName, attrs) {
+        // console.log("开始标签:", tagName, "属性是:", attrs);
+        let element = createASTElement(tagName, attrs);
+        if (!root) {
+            root = element;
+        }
+        currentParent = element;
+        stack.push(element); //开始标签存放到栈中
+    }
+    function end(tagName) {
+        // console.log("结束标签:", tagName);
+        let element = stack.pop();
+        currentParent = stack[stack.length - 1];
+        if (currentParent) {
+            element.parent = currentParent;
+            currentParent.children.push(element);
+        }
+    }
+    function chars(text) {
+        // console.log("文本是:", text);
+        text = text.replace(/\s/g, "");
+        if (text) {
+            currentParent.children.push({
+                text,
+                type: TEXT_TYPE,
+            });
+        }
+    }
     while (html) {
         let textEnd = html.indexOf("<");
         if (textEnd == 0) {
