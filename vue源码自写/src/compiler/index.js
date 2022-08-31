@@ -177,7 +177,7 @@ export function compileToFunction(template) {
     // code:_c("div", { id: "app", style: { "color": "red", "font-size": "14px" } }, _c("p", undefined, _v("hello" + _s(name) + "you"))
     let renderFn = new Function(`with(this){return ${code}}`);
     //返回生成的render函数
-    console.log('生成的render函数', renderFn)
+    // console.log('生成的render函数', renderFn)
     return renderFn;
 }
 
