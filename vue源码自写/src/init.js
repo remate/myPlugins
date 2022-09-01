@@ -2,6 +2,7 @@ import { initState } from "./state";
 import { mountComponent, callHook } from "./lifecycle";
 import { compileToFunction } from "./compiler/index";
 import { mergeOptions } from "./util/index";
+import { nextTick } from "./util/nexttick";
 export function initMixin(Vue) {
     Vue.prototype._init = function (options) {
         // 数据劫持
@@ -35,4 +36,5 @@ export function initMixin(Vue) {
         }
         mountComponent(vm, el)
     }
+    Vue.prototype.$nextTick = nextTick
 }

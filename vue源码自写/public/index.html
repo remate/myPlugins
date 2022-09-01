@@ -9,7 +9,7 @@
 
 <body>
     <div id="app" style="color:red;font-size:20px">
-        <p>hello{{name}}you</p>
+        <p>{{arr}}</p>
     </div>
     <script src="/dist/umd/vue.js"></script>
     <script>
@@ -18,20 +18,22 @@
             data() {
                 return {
                     name: 'zuoci',
-                    age: '29'
+                    arr: [1,2,[1]]
                 }
             },
             computed() { },
             watch() { },
-            beforeCreate() {
-                console.log('user')
-            }
         })
         // console.log('用户获取data::html', vm._data)
         // with(vm._data){
         //     console.log(age)
         // }
         // console.log(vm.age)
+        setTimeout(() => {
+            vm.arr.push(4,5)//需要依赖收集，数据变化后，会自动更新
+            vm.arr.push(6)//需要依赖收集，数据变化后，会自动更新
+            console.log('html:changed')
+        }, 2000);
     </script>
 </body>
 
