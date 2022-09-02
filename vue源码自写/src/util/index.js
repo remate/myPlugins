@@ -30,12 +30,26 @@ function mergeHook(parentVal, childVal) {
 LIFECYCLE_HOOKS.forEach(hook => {
     strats[hook] = mergeHook
 })
+
+
+function mergeAssets(parentVal, childVal) {
+    const res = Object.create(parentVal)
+    if (childVal) {
+        for (let key in childVal) {
+            res[key] = childVal[key]
+        }
+    }
+    return res
+}
+strats.components = mergeAssets
+
+
 export function mergeOptions(parent, child) {
     const options = {};
     for (let key in parent) {
         mergeField(key);
     }
-    for (let key in child) {
+    for (let key in child) {//如果child有
         if (!parent.hasOwnProperty(key)) {
             mergeField(key)
         }
@@ -57,4 +71,13 @@ export function mergeOptions(parent, child) {
         }
     }
     return options;
+}
+
+export function isReservedTag(tagName) {
+    let str = 'p,div,span,input,button'
+    let obj = {}
+    str.split(',').forEach(tag => {
+        obj[tag] = true
+    })
+    return obj[tagName]
 }

@@ -9,31 +9,30 @@
 
 <body>
     <div id="app" style="color:red;font-size:20px">
-        <p>{{arr}}</p>
+        <p>{{name}}</p>
+        <my-component></my-component>
     </div>
     <script src="/dist/umd/vue.js"></script>
     <script>
+        Vue.component('my-component', {
+            template: '<div>com</div>'
+        })
         let vm = new Vue({
             el: '#app',
             data() {
                 return {
                     name: 'zuoci',
-                    arr: [1,2,[1]]
                 }
             },
             computed() { },
             watch() { },
+            components: {
+                'my-component2': {
+                    template: '<div>com</div>',
+                }
+            }
         })
-        // console.log('用户获取data::html', vm._data)
-        // with(vm._data){
-        //     console.log(age)
-        // }
-        // console.log(vm.age)
-        setTimeout(() => {
-            vm.arr.push(4,5)//需要依赖收集，数据变化后，会自动更新
-            vm.arr.push(6)//需要依赖收集，数据变化后，会自动更新
-            console.log('html:changed')
-        }, 2000);
+        console.log(vm)
     </script>
 </body>
 

@@ -1,20 +1,41 @@
 export function patch(oldVnode, vnode) {
     // console.log("old", oldVnode);
     // console.log("new", vnode);
-
-    const isRealElement = oldVnode.nodeType;
-    if (isRealElement) {
-        const oldElm = oldVnode;
-        const parentElm = oldElm.parentNode;
-        let el = createElm(vnode);
-        parentElm.insertBefore(el, oldElm.nextSibling);
-        parentElm.removeChild(oldElm);
-        return el
+    if (!oldVnode) {
+        // 组件挂载
+        return createElm(vnode)
+    } else {
+        const isRealElement = oldVnode.nodeType;
+        if (isRealElement) {
+            const oldElm = oldVnode;
+            const parentElm = oldElm.parentNode;
+            let el = createElm(vnode);
+            parentElm.insertBefore(el, oldElm.nextSibling);
+            parentElm.removeChild(oldElm);
+            return el
+        }
+    }
+}
+function createComponent(vnode) {
+    // 需要创建组件的实例
+    let i = vnode.data
+    if ((i = i.hook) && (i = i.init)) {
+        i(vnode)
+    }
+    if (vnode.componentInstance) {
+        return true
     }
 }
 function createElm(vnode) {
     let { tag, data, children, key, text } = vnode;
     if (typeof tag === "string") {
+        //不是tag是字符串的那就是普通的html或者组件
+
+        // 实例化组件
+        if (createComponent(vnode)) {
+            // 返回真实dom 
+            return vnode.componentInstance.$el
+        }
         vnode.el = document.createElement(tag);
         updateProperties(vnode)
         children.forEach((child) => {
