@@ -76,7 +76,7 @@ This performs linting on:
 yarn lint
 ```
 
-### To run only the typechecker use
+### To run only the typechecker use  
 
 ```bash
 yarn type-lint

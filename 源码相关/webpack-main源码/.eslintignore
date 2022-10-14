@@ -14,7 +14,7 @@ coverage
 schemas/**/*.check.js
 
 # Ignore some test files
-test/*
+test/* 
 !test/*Cases
 !test/helpers
 !test/*.js
