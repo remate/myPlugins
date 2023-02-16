@@ -39,7 +39,7 @@ export class Observer {
   dep: Dep;
   vmCount: number; // number of vms that have this object as root $data
 
-  constructor (value: any) {
+  constructor(value: any) {
     this.value = value
     this.dep = new Dep()
     this.vmCount = 0
@@ -152,7 +152,6 @@ export function defineReactive (
   if ((!getter || setter) && arguments.length === 2) {
     val = obj[key]
   }
-
   let childOb = !shallow && observe(val)
   Object.defineProperty(obj, key, {
     enumerable: true,
@@ -188,6 +187,7 @@ export function defineReactive (
         val = newVal
       }
       childOb = !shallow && observe(newVal)
+      console.log('22', dep)
       dep.notify()
     }
   })

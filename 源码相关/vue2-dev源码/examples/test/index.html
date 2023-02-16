@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Vue.js wrapper component example (jquery plugin: select2)</title>
+  <!-- Delete ".min" for console warnings in development -->
+  <script src="../../dist/vue.js"></script>
+  <style>
+    html,
+    body {
+      font: 13px/18px sans-serif;
+    }
+
+    select {
+      min-width: 300px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="el">
+    {{selected}}
+    <div>nihao{{selected}}</div>
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: '#el',
+      data: {
+        selected: 0,
+        options: [
+          { id: 1, text: 'Hello' },
+          { id: 2, text: 'World' }
+        ]
+      },
+      mounted () {
+        console.log(22)
+        setTimeout(() => {
+          this.selected = 55
+        }, 2000);
+      }
+    })
+  </script>
+</body>
+
+</html>
